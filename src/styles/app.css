@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  background: #0f0f1a;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  padding-top: 40px;
+  color: white;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.stats {
+  font-size: clamp(16px, 4vw, 20px);
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.tap-button {
+  width: clamp(160px, 50vw, 220px);
+  height: clamp(160px, 50vw, 220px);
+  border-radius: 50%;
+  border: none;
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(145deg, #6a5cff, #4b3dff);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  cursor: pointer;
+}
+
+.tap-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+@media (min-width: 768px) {
+  .app {
+    justify-content: center;
+  }
+}
