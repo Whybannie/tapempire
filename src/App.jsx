@@ -5,6 +5,7 @@ function App() {
   const tg = window.Telegram?.WebApp;
 
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState("home");
   const [coins, setCoins] = useState(0);
   const [energy, setEnergy] = useState(100);
   const [username, setUsername] = useState("Игрок");
@@ -23,28 +24,24 @@ function App() {
 
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("coins", coins);
   }, [coins]);
 
-  const tapSound = new Audio(
-    "https://www.soundjay.com/buttons/sounds/button-09.mp3"
-  );
-
   const handleTap = () => {
     if (energy <= 0) return;
-
     setCoins((prev) => prev + 1);
     setEnergy((prev) => prev - 1);
-    tapSound.play();
   };
 
   const restoreEnergy = () => {
     setEnergy(100);
   };
+
+  const referralLink = `https://t.me/YOUR_BOT_USERNAME?start=${username}`;
 
   if (loading) {
     return (
@@ -57,24 +54,73 @@ function App() {
 
   return (
     <div className="app">
+
       <div className="header">
         <div>@{username}</div>
-        <div>💰 {coins}</div>
+        <div>{coins} COIN</div>
       </div>
 
-      <div className="center">
-        <button className="tap-button" onClick={handleTap}>
-          TAP
-        </button>
-        <p>⚡ Энергия: {energy}</p>
-      </div>
+      {page === "home" && (
+        <div className="center">
+          <button className="tap-button" onClick={handleTap}>
+            TAP
+          </button>
+          <p>Энергия: {energy}</p>
+        </div>
+      )}
+
+      {page === "referral" && (
+        <div className="page">
+          <h2>Реферальная система</h2>
+          <p>Приглашай друзей и получай 100 COIN</p>
+          <input
+            className="ref-input"
+            value={referralLink}
+            readOnly
+          />
+          <button
+            className="primary-btn"
+            onClick={() => navigator.clipboard.writeText(referralLink)}
+          >
+            Скопировать ссылку
+          </button>
+        </div>
+      )}
+
+      {page === "leaderboard" && (
+        <div className="page">
+          <h2>Лидерборд</h2>
+          <p>Скоро подключим сервер</p>
+        </div>
+      )}
 
       <div className="bottom-menu">
-        <button className="menu-btn">🏠 Главная</button>
-        <button className="menu-btn">🏆 Лидеры</button>
-        <button className="menu-btn">👥 Друзья</button>
-        <button className="menu-btn" onClick={restoreEnergy}>
-          🔋 Восст.
+        <button
+          className={page === "home" ? "nav active" : "nav"}
+          onClick={() => setPage("home")}
+        >
+          Главная
+        </button>
+
+        <button
+          className={page === "leaderboard" ? "nav active" : "nav"}
+          onClick={() => setPage("leaderboard")}
+        >
+          Лидеры
+        </button>
+
+        <button
+          className={page === "referral" ? "nav active" : "nav"}
+          onClick={() => setPage("referral")}
+        >
+          Друзья
+        </button>
+
+        <button
+          className="nav"
+          onClick={restoreEnergy}
+        >
+          Энергия
         </button>
       </div>
     </div>

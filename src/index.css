@@ -99,3 +99,38 @@ body {
   50% { opacity: 1; transform: scale(1.1); }
   100% { opacity: 0.6; transform: scale(1); }
 }
+.nav {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.nav.active {
+  background: linear-gradient(90deg,#ffcc00,#ff8800);
+  color: black;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.primary-btn {
+  background: linear-gradient(90deg,#ffcc00,#ff8800);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ref-input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
